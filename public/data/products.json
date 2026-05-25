@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "PlayStation 5 Console",
+    "price": 950000,
+    "stock": 14,
+    "image": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": 2,
+    "name": "Gaming Laptop",
+    "price": 1850000,
+    "stock": 6,
+    "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": 3,
+    "name": "Mechanical Keyboard",
+    "price": 120000,
+    "stock": 20,
+    "image": "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": 4,
+    "name": "Wireless Gaming Mouse",
+    "price": 85000,
+    "stock": 18,
+    "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": 5,
+    "name": "4K Curved Monitor",
+    "price": 430000,
+    "stock": 9,
+    "image": "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": 6,
+    "name": "Canon DSLR Camera",
+    "price": 780000,
+    "stock": 4,
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": 7,
+    "name": "Apple AirPods Pro",
+    "price": 250000,
+    "stock": 25,
+    "image": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": 8,
+    "name": "Xbox Series X",
+    "price": 890000,
+    "stock": 11,
+    "image": "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?q=80&w=1200&auto=format&fit=crop"
+  }
+]

@@ -1,0 +1,101 @@
+/* ItemListContainer.module.css */
+
+/* ── Tokens globales del layout ─────────────────────── */
+.contenedor {
+    --clr-bg:      #0d0e10;
+    --clr-text:    #f0f0f0;
+    --clr-muted:   #606070;
+    --clr-accent:  #c9a84c;
+    --clr-danger:  #ff3c5a;
+
+    min-height: 100vh;
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    padding: clamp(24px, 5vw, 64px) clamp(16px, 5vw, 80px);
+    font-family: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+/* ── Encabezado ─────────────────────────────────────── */
+.encabezado {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: clamp(24px, 4vw, 48px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 20px;
+}
+
+.titulo {
+    margin: 0;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: var(--clr-text);
+    line-height: 1;
+}
+
+.subtitulo {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--clr-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Estados: carga y error ─────────────────────────── */
+.estadoWrapper {
+    min-height: 100vh;
+    background: var(--clr-bg, #0d0e10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-family: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+.estadoTexto {
+    margin: 0;
+    color: #808090;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+}
+
+/* ── Spinner ────────────────────────────────────────── */
+.spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(201, 168, 76, 0.15);
+    border-top-color: #c9a84c;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Error ──────────────────────────────────────────── */
+.errorWrapper {
+    gap: 12px;
+}
+
+.errorIcono {
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 60, 90, 0.4));
+}
+
+.errorWrapper .estadoTexto {
+    color: #ff3c5a;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 480px) {
+    .encabezado {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
