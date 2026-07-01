@@ -3,11 +3,20 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
+import { ProductsProvider } from './context/ProductsContext.jsx';
+import { SearchProvider } from './context/SearchContext.jsx';
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
-        <CartProvider>
-            <App />
-        </CartProvider>
+        <SearchProvider>
+            <AuthProvider>
+                <ProductsProvider>
+                    <CartProvider>
+                        <App />
+                    </CartProvider>
+                </ProductsProvider>
+            </AuthProvider>
+        </SearchProvider>
     </BrowserRouter>
 );
