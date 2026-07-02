@@ -44,8 +44,8 @@ export const usePagination = (collectionName, orderField = "name", itemsPerPage 
             const snapshot = await getDocs(q);
 
             const items = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
+                ...doc.data(),
+                id: doc.id
             }));
 
             setData(items);

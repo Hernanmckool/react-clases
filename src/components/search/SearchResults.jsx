@@ -3,8 +3,6 @@ import { useSearch } from "../../context/SearchContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "../styles/search/SearchResults.module.css";
-import cardStyles from "../styles/items/Item.module.css";
 
 const SearchResults = () => {
     const { search } = useSearch();
@@ -16,7 +14,7 @@ const SearchResults = () => {
     useEffect(() => {
         const fetchAllProducts = async () => {
             const snapshot = await getDocs(collection(db, "products"));
-            const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            const items = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
             setAllProducts(items);
         };
 
@@ -35,42 +33,42 @@ const SearchResults = () => {
     );
 
     return (
-        <div className={styles.container}>
-            <h2 className={styles.title}>Products Found</h2>
-            <div className={styles.grid}>
+        <div className="max-w-6xl mx-auto px-5 py-10">
+            <h2 className="text-3xl font-normal text-white mb-6">Productos encontrados</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map((product) => (
-                        <article key={product.id} className={cardStyles.card}>
-                            <Link to={`/product/${product.id}`} className={cardStyles.imageWrapper}>
+                        <article key={product.id} className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 shadow-lg">
+                            <Link to={`/product/${product.id}`} className="block w-full h-[180px] overflow-hidden bg-zinc-950">
                                 <img
                                     src={product.image}
                                     alt={product.name}
-                                    className={cardStyles.image}
+                                    className="w-full h-full object-cover block"
                                 />
-                                <div className={cardStyles.imageOverlay} />
                             </Link>
 
-                            <div className={cardStyles.body}>
-                                <div className={cardStyles.header}>
-                                    <Link to={`/product/${product.id}`} className={cardStyles.nameLink}>
-                                        <h2 className={cardStyles.name}>{product.name}</h2>
-                                    </Link>
-                                </div>
+                            <div className="p-4">
+                                <Link to={`/product/${product.id}`} className="no-underline">
+                                    <h2 className="m-0 text-xl text-white">{product.name}</h2>
+                                </Link>
 
-                                <p className={cardStyles.price}>
-                                    <span className={cardStyles.currency}>ARS</span>
+                                <p className="mt-3.5 mb-2 text-lg text-white font-bold">
+                                    <span className="mr-1 text-zinc-400 text-xs">ARS $</span>
                                     {Number(product.price).toLocaleString("es-AR")}
                                 </p>
 
-                                <Link to={`/product/${product.id}`} className={cardStyles.detailButton}>
-                                    View Detail
+                                <Link
+                                    to={`/product/${product.id}`}
+                                    className="block text-center w-full rounded-lg p-2.5 bg-white text-zinc-900 font-bold no-underline"
+                                >
+                                    Ver Detalle
                                 </Link>
                             </div>
                         </article>
                     ))
                 ) : (
-                    <p className={styles.noResults}>
-                        No products match your search.
+                    <p className="text-zinc-500 text-center py-10 col-span-full">
+                        No hay productos que coincidan con tu búsqueda.
                     </p>
                 )}
             </div>

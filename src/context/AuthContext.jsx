@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
                         const userData = userDocSnap.data();
                         setUser({ ...currentUser, name: userData.name, role: userData.role ?? "user" });
                     } else {
-                        setUser({ ...currentUser, name: "Guest", role: "user" });
+                        setUser({ ...currentUser, name: "Invitado", role: "user" });
                     }
                 } else {
                     setUser(null);

@@ -19,8 +19,9 @@ const products = JSON.parse(
 );
 
 for (const product of products) {
-    await setDoc(doc(db, "products", String(product.id)), product);
-    console.log(`Migrated product ${product.id}: ${product.name}`);
+    const { id, ...productData } = product;
+    await setDoc(doc(db, "products", String(id)), productData);
+    console.log(`Migrated product ${id}: ${product.name}`);
 }
 
 console.log(`Done. ${products.length} products migrated.`);

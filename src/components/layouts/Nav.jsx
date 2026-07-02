@@ -1,18 +1,17 @@
 import { Link } from 'react-router-dom';
-import styles from '../styles/layouts/Nav.module.css';
 
 const Nav = () => {
     return (
-        <nav className={styles.navContainer}>
-            <ul className={styles.navList}>
+        <nav>
+            <ul className="flex gap-6 list-none m-0 p-0">
                 <li>
-                    <Link to="/" className={styles.navLink}>Home</Link>
+                    <Link to="/" className="text-zinc-300 no-underline hover:text-white">Inicio</Link>
                 </li>
                 <li>
-                    <Link to="/products" className={styles.navLink}>Products</Link>
+                    <Link to="/products" className="text-zinc-300 no-underline hover:text-white">Productos</Link>
                 </li>
                 <li>
-                    <Link to="/contact" className={styles.navLink}>Contact</Link>
+                    <Link to="/contact" className="text-zinc-300 no-underline hover:text-white">Contacto</Link>
                 </li>
             </ul>
         </nav>

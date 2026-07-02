@@ -1,26 +1,28 @@
-import styles from '../styles/layouts/Footer.module.css';
-
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className={styles.footer}>
+        <footer className="text-white px-4 py-8 flex flex-col items-center gap-6 border-t border-zinc-700">
             <nav>
-                <ul className={styles.footerNav}>
+                <ul className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 list-none m-0 p-0">
                     <li>
-                        <a href="#about" className={styles.footerLink}>About Us</a>
+                        <a href="#about" className="text-zinc-300 text-sm no-underline hover:text-yellow-400 hover:underline">
+                            Nosotros
+                        </a>
                     </li>
                     <li>
-                        <a href="#privacy" className={styles.footerLink}>Privacy Policy</a>
+                        <a href="#privacy" className="text-zinc-300 text-sm no-underline hover:text-yellow-400 hover:underline">
+                            Política de Privacidad
+                        </a>
                     </li>
                 </ul>
             </nav>
 
-            <hr className={styles.divider} />
+            <hr className="w-full max-w-md border-zinc-700" />
 
-            <div className={styles.copyrightContainer}>
-                <p className={styles.copyright}>
-                    © {currentYear} <span className={styles.brand}>JUANCHO Store</span>. All rights reserved.
+            <div>
+                <p className="text-zinc-500 text-sm text-center tracking-wide m-0">
+                    © {currentYear} <span className="font-semibold text-zinc-300">HernanMckool Store</span>. Todos los derechos reservados.
                 </p>
             </div>
         </footer>

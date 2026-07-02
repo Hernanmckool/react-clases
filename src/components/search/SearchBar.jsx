@@ -1,26 +1,29 @@
 import { useSearch } from "../../context/SearchContext";
-import { useNavigate } from "react-router-dom";
-import styles from "../styles/search/SearchBar.module.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SearchBar = () => {
     const { search, setSearch } = useSearch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSearch = (event) => {
         const value = event.target.value;
         setSearch(value);
 
-        if (value.trim()) {
+        // On the Dashboard, search filters the inventory list in place
+        // instead of navigating away to the public /search results.
+        const isOnDashboard = location.pathname.startsWith("/dashboard");
+        if (value.trim() && !isOnDashboard) {
             navigate("/search");
         }
     };
 
     return (
-        <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
-            <div className={styles.relativeWrapper}>
-                <div className={styles.iconWrapper}>
+        <form className="max-w-md w-full mx-auto" onSubmit={(e) => e.preventDefault()}>
+            <div className="relative flex items-center">
+                <div className="absolute left-3.5 flex items-center pointer-events-none">
                     <svg
-                        className={styles.searchIcon}
+                        className="w-4 h-4 text-zinc-500"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -39,8 +42,8 @@ const SearchBar = () => {
                 <input
                     type="search"
                     id="search"
-                    className={styles.searchInput}
-                    placeholder="Search products..."
+                    className="w-full pl-10 pr-4 py-2.5 text-sm text-white bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-white placeholder:text-zinc-500"
+                    placeholder="Buscar productos..."
                     value={search}
                     onChange={handleSearch}
                 />

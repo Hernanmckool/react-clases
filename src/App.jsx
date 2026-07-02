@@ -9,14 +9,14 @@ import Register from './components/pages/Register';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Dashboard from './components/forms/Dashboard';
 import SearchResults from './components/search/SearchResults';
-import './App.css';
+import Home from './components/pages/Home';
 
 function App() {
     return (
         <>
             <Routes>
                 <Route element={<Layout />}>
-                    <Route path='/' element={<h1>Home</h1>} />
+                    <Route path='/' element={<Home />} />
                     <Route path='/contact' element={<Contact />} />
                     <Route path='/products' element={<ItemListContainer />} />
                     <Route path='/product/:id' element={<ProductDetail />} />

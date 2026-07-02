@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useProducts } from "../../context/ProductsContext";
 import ProductForm from "../items/ProductForm";
+import ConfirmModal from "../ConfirmModal";
 
 const IMGBB_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
@@ -21,6 +22,7 @@ const FormContainer = ({ closeModal, editingProduct = null }) => {
     const [imageFile, setImageFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(INITIAL_STATE);
+    const [infoModal, setInfoModal] = useState(null);
 
     const mode = editingProduct ? "edit" : "add";
 
@@ -47,7 +49,7 @@ const FormContainer = ({ closeModal, editingProduct = null }) => {
         setImageFile(file ?? null);
         // Update the visible name in the file input
         const label = document.getElementById("file-name");
-        if (label) label.textContent = file ? file.name : "No file selected";
+        if (label) label.textContent = file ? file.name : "Sin archivo seleccionado";
     };
 
     // Uploads the image to ImgBB and returns the URL, or null if it fails
@@ -64,15 +66,14 @@ const FormContainer = ({ closeModal, editingProduct = null }) => {
         return json.success ? json.data.url : null;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const saveProduct = async () => {
         setLoading(true);
 
         try {
             // This part runs when in add mode
             if (mode === "add") {
                 if (!imageFile) {
-                    alert("Please upload an image");
+                    setInfoModal({ title: "Falta la imagen", message: "Por favor subí una imagen.", closeOnDismiss: false });
                     setLoading(false);
                     return;
                 }
@@ -88,9 +89,9 @@ const FormContainer = ({ closeModal, editingProduct = null }) => {
                 };
 
                 await createProduct(newProduct);
-                alert("Product added!");
                 setFormData(INITIAL_STATE);
                 setImageFile(null);
+                setInfoModal({ title: "Éxito", message: "¡Producto agregado!", closeOnDismiss: true });
 
             // otherwise we're in edit mode
             } else {
@@ -110,30 +111,49 @@ const FormContainer = ({ closeModal, editingProduct = null }) => {
                 };
 
                 await updateProduct(editingProduct.id, updatedData);
-                alert("Product updated!");
+                setInfoModal({ title: "Éxito", message: "¡Producto actualizado!", closeOnDismiss: true });
             }
-
-            closeModal?.();
 
         } catch (error) {
 
             console.error("Error:", error);
-            alert("An error occurred. Check the console.");
+            setInfoModal({ title: "Error", message: "Ocurrió un error. Revisá la consola.", closeOnDismiss: false });
 
         } finally {
             setLoading(false);
         }
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        saveProduct();
+    };
+
+    const handleInfoClose = () => {
+        const shouldCloseModal = infoModal?.closeOnDismiss;
+        setInfoModal(null);
+        if (shouldCloseModal) closeModal?.();
+    };
+
     return (
-        <ProductForm
-            formData={formData}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            handleImageChange={handleImageChange}
-            mode={mode}
-            loading={loading}
-        />
+        <>
+            <ProductForm
+                formData={formData}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                handleImageChange={handleImageChange}
+                mode={mode}
+                loading={loading}
+            />
+
+            <ConfirmModal
+                open={!!infoModal}
+                title={infoModal?.title}
+                message={infoModal?.message}
+                confirmText="Aceptar"
+                onConfirm={handleInfoClose}
+            />
+        </>
     );
 };
 

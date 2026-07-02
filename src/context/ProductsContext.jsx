@@ -13,7 +13,7 @@ export const ProductsProvider = ({ children }) => {
         totalPages,
         loadPage,
         refreshPage
-    } = usePagination("products", "name", 4);
+    } = usePagination("products", "name", 6);
 
     const createProduct = async (newProduct) => {
         await addDoc(collection(db, "products"), newProduct);

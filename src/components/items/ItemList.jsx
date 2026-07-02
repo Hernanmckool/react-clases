@@ -1,10 +1,9 @@
 // ItemList.jsx
 import Item from './Item';
-import styles from '../styles/items/ItemList.module.css';
 
 const ItemList = ({ products }) => {
     return (
-        <section className={styles.grid}>
+        <section className="flex flex-wrap justify-center gap-6 p-6">
             {products.map(product =>
                 <Item key={product.id} {...product} />
             )}
