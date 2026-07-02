@@ -1,13 +1,42 @@
-import Products from './components/Products.jsx';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/layouts/Layout';
+import ProductDetail from './components/items/ProductDetail';
+import ItemListContainer from './components/items/ItemListContainer';
+import Contact from './components/pages/Contact';
+import Cart from './components/pages/Cart';
+import Login from './components/pages/Login';
+import Register from './components/pages/Register';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import Dashboard from './components/forms/Dashboard';
+import SearchResults from './components/search/SearchResults';
+import Home from './components/pages/Home';
 
 function App() {
+    return (
+        <>
+            <Routes>
+                <Route element={<Layout />}>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/contact' element={<Contact />} />
+                    <Route path='/products' element={<ItemListContainer />} />
+                    <Route path='/product/:id' element={<ProductDetail />} />
+                    <Route path='/cart' element={<Cart />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/search' element={<SearchResults />} />
 
-  return (
-    <>
-      <h1>Bienvenidos</h1>
-      <Products products="Tomate" />
-    </>
-  )
+                    <Route
+                        path='/dashboard'
+                        element={
+                            <ProtectedRoutes allowedRoles={["admin"]}>
+                                <Dashboard />
+                            </ProtectedRoutes>
+                        }
+                    />
+                </Route>
+            </Routes>
+        </>
+    );
 }
 
-export default App
+export default App;

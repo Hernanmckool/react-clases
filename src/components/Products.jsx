@@ -1,5 +1,5 @@
-const Products = (props) => {
-    return <h2>{props.products}</h2>;
+const Products = ({products, price}) => {
+    return <h2>{products} : {price} pesos</h2>;
 }
 
 export default Products;
